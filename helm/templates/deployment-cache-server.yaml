@@ -5,7 +5,7 @@ metadata:
   name: "{{ .Release.Name }}-deployment-cache-server"
   namespace: {{ .Release.Namespace }}
   labels:
-    app.kubernetes.io/name: "{{ .Release.Name }}-cache-server-service"
+    app.kubernetes.io/name: "{{ .Release.Name }}-cache-server"
     app.kubernetes.io/instance: "{{ .Release.Name }}"
     app.kubernetes.io/version: "{{ .Chart.AppVersion }}"
     app.kubernetes.io/component: "cache-server"
@@ -16,12 +16,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: "{{ .Release.Name }}-cache-server-service"
+      app.kubernetes.io/name: "{{ .Release.Name }}-cache-server"
       {{- include "chart.cacheserverLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: "{{ .Release.Name }}-cache-server-service"
+        app.kubernetes.io/name: "{{ .Release.Name }}-cache-server"
         {{- include "chart.cacheserverLabels" . | nindent 8 }}
     spec:
       {{- if .Values.cacheserverSpec.nodeSelectorTerms}}

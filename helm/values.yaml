@@ -361,7 +361,7 @@ routerSpec:
 
 cacheserverSpec:
   enabled: false
-  repository: "lmcache/lmcache-experimental-server"
+  repository: "vllm/vllm-cacheserver"
   tag: "latest"
   labels: {}
   # -- Tolerations configuration (when there are taints on nodes)

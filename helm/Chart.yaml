@@ -1,4 +1,5 @@
 apiVersion: v2
+appVersion: v0.1.3
 name: vllm-stack
 description: The stack deployment of vLLM
 
