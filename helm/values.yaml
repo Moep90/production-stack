@@ -358,3 +358,18 @@ routerSpec:
   #  httpGet:
   #    # -- Path to access on the HTTP server
   #
+
+cacheserverSpec:
+  enabled: false
+  repository: "lmcache/lmcache-experimental-server"
+  tag: "latest"
+  labels: {}
+  # -- Tolerations configuration (when there are taints on nodes)
+  # Example:
+  # tolerations:
+  #   - key: "node-role.kubernetes.io/control-plane"
+  #     operator: "Exists"
+  #     effect: "NoSchedule"
+  tolerations: []
+  containerPort: 8100
+  servicePort: 8100

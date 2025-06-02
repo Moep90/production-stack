@@ -1,18 +1,25 @@
-{{- if .Values.cacheserverSpec -}}
+{{- if and .Values.cacheserverSpec .Values.cacheserverSpec.enabled -}}
 apiVersion: v1
 kind: Service
 metadata:
   name: "{{ .Release.Name }}-cache-server-service"
   namespace: {{ .Release.Namespace }}
   labels:
-  {{- include "chart.cacheserverLabels" . | nindent 4 }}
+    app.kubernetes.io/name: "{{ .Release.Name }}-cache-server-service"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/version: "{{ .Chart.AppVersion }}"
+    app.kubernetes.io/component: "cache-server"
+    app.kubernetes.io/part-of: "vllm-stack"
+    app.kubernetes.io/managed-by: helm
+    {{- include "chart.cacheserverLabels" . | nindent 4 }}
 spec:
   type: ClusterIP
   ports:
-    - name: "cacheserver-sport"
+    - name: "cache-server-port"
       port: {{ .Values.cacheserverSpec.servicePort }}
-      targetPort: {{ .Values.cacheserverSpec.containerPort }}
+      targetPort: {{ .Values.cacheserverSpec.containerPort}}
       protocol: TCP
   selector:
-  {{- include "chart.cacheserverLabels" . | nindent 4 }}
+    app.kubernetes.io/name: "{{ .Release.Name }}-cache-server-service"
+    {{- include "chart.cacheserverLabels" . | nindent 4 }}
 {{- end -}}
